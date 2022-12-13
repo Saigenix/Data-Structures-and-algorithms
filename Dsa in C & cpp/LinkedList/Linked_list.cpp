@@ -31,7 +31,7 @@ int main()
  
     // Link first and second nodes
     head->data = 7;
-    head->next = second;
+    head->next = second; 
  
     // Link second and third nodes
     second->data = 11;
