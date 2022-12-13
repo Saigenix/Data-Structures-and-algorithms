@@ -6,7 +6,6 @@ struct Node{
     struct Node * next;
 }*head,*p1;
 
-
 void linkedListTraversal()
 {
     struct Node* ptr = head;

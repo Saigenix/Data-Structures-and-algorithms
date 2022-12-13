@@ -9,7 +9,6 @@ void printArray(int* A, int n){
 }
 void bubbleSort(int *A, int n){
     int temp;
-    int isSorted = 0;
     for (int i = 0; i < n-1; i++) // For number of pass
     {
         printf("Working on pass number %d\n", i+1); 
