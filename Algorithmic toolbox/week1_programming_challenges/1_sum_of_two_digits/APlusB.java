@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 class APlusB {
     static int sumOfTwoDigits(int first_digit, int second_digit) {
         return first_digit + second_digit;
