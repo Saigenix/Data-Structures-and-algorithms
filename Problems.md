@@ -12,3 +12,8 @@
 8.[Make Matrix Beautiful](https://practice.geeksforgeeks.org/problems/make-matrix-beautiful-1587115620/1)
 9.[459. Repeated Substring Pattern
 ](https://leetcode.com/problems/repeated-substring-pattern/description/)
+10.[Multiply two strings
+](https://practice.geeksforgeeks.org/problems/multiply-two-strings/1)
+11.[Find the string in grid]()
+12.[239. Sliding Window Maximum
+](https://leetcode.com/problems/sliding-window-maximum/description/)

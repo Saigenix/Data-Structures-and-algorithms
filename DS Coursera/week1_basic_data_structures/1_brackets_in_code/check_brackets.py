@@ -15,20 +15,24 @@ def find_mismatch(text):
     for i, next in enumerate(text):
         if next in "([{":
             # Process opening bracket, write your code here
-            opening_brackets_stack.append(next)
+            opening_brackets_stack.append(Bracket(next,i))
+            # num+=1
 
         if next in ")]}":
             # Process closing bracket, write your code here
             if len(opening_brackets_stack) == 0:
-                return (i+1)
-            if are_matching(opening_brackets_stack[-1], next):
+                num = 1+i
+                return num
+            if are_matching(opening_brackets_stack[-1].char, next):
                 opening_brackets_stack.pop()
+                # num-=1
             else:
-                return i+1
+                num = i+ 1
+                return num
     if len(opening_brackets_stack) == 0:
         return "Success"
     else:
-        return num
+        return opening_brackets_stack[-1].position+1
 
 
 def main():
