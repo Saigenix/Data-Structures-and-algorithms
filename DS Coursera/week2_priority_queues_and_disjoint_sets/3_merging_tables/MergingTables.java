@@ -21,21 +21,33 @@ public class MergingTables {
 
     class Table {
         Table parent;
+        Table mergedTo;
+        int id;
         int rank;
-        int numberOfRows;
+        long numberOfRows;
 
-        Table(int numberOfRows) {
+        Table(long numberOfRows) {
             this.numberOfRows = numberOfRows;
             rank = 0;
             parent = this;
+            mergedTo = null;
         }
         Table getParent() {
             // find super parent and compress path
-            return parent;
+            Table p = this.parent;
+            while (p != p.parent) {
+                p = p.parent;
+            }
+            return p.parent;
+        }
+
+        @Override
+        public String toString() {
+            return Integer.toString(id);
         }
     }
 
-    int maximumNumberOfRows = -1;
+    long maximumNumberOfRows = -1;
 
     void merge(Table destination, Table source) {
         Table realDestination = destination.getParent();
@@ -43,9 +55,34 @@ public class MergingTables {
         if (realDestination == realSource) {
             return;
         }
-        // merge two components here
+//        // merge two components here
+        long totalMergedRows;
+
         // use rank heuristic
+        if (realDestination.rank > realSource.rank) {
+            realSource.parent = realDestination;
+
+            realDestination.numberOfRows += realSource.numberOfRows;
+            realDestination.mergedTo = destination;
+            realSource.mergedTo = null;
+
+            totalMergedRows = realDestination.numberOfRows;
+        } else {
+            realDestination.parent = realSource;
+
+            realSource.numberOfRows += realDestination.numberOfRows;
+            realSource.mergedTo = destination;
+            realDestination.mergedTo = null;
+
+            totalMergedRows = realSource.numberOfRows;
+
+            if (realDestination.rank == realSource.rank) {
+                realSource.rank = realDestination.rank + 1;
+            }
+        }
+
         // update maximumNumberOfRows
+        maximumNumberOfRows = Math.max(maximumNumberOfRows, totalMergedRows);
     }
 
     public void run() {
@@ -55,6 +92,7 @@ public class MergingTables {
         for (int i = 0; i < n; i++) {
             int numberOfRows = reader.nextInt();
             tables[i] = new Table(numberOfRows);
+            tables[i].id = i + 1;
             maximumNumberOfRows = Math.max(maximumNumberOfRows, numberOfRows);
         }
         for (int i = 0; i < m; i++) {
